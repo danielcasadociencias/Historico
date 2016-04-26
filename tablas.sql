@@ -14,8 +14,8 @@ CREATE TABLE plaza (
     Guarda la fecha cuando iniciaron las plazas
     a estar relacionadas
 */
-CREATE TABLE plaza_media_plaza (,
-    id_plaza integer NOT NULL REFERENCES plaza ON id_plaza,
+CREATE TABLE plaza_media_plaza (
+    id_plaza integer NOT NULL REFERENCES plaza(id_plaza),
     id_media_plaza integer NOT NULL,
     fecha_inicio date NOT NULL
 );
@@ -26,7 +26,7 @@ CREATE TABLE plaza_media_plaza (,
 */
 CREATE TABLE trabajador (
     id_trabajador integer PRIMARY KEY,
-    id_plaza integer NOT NULL REFERENCES plaza ON id_plaza,
+    id_plaza integer NOT NULL REFERENCES plaza(id_plaza),
     fecha_inicio date NOT NULL
 );
 /*
@@ -39,7 +39,7 @@ CREATE TABLE trabajador (
     fecha B, el siguiente estado empezó en la fecha B+1 y así...
 */
 CREATE TABLE historico_plaza_estado (
-    id_plaza integer NOT NULL REFERENCES plaza ON id_plaza,
+    id_plaza integer NOT NULL REFERENCES plaza(id_plaza),
     id_estado integer NOT NULL,
     fecha_inicio date NOT NULL,
     fecha_fin date NOT NULL
@@ -56,8 +56,8 @@ CREATE TABLE historico_plaza_estado (
     periodo de tiempo
 */
 CREATE TABLE historico_plaza_media_plaza (
-    id_plaza integer NOT NULL REFERENCES plaza ON id_plaza,
-    id_media_plaza integer NOT NULL REFERENCES media_plaza ON id_media_plaza,
+    id_plaza integer NOT NULL REFERENCES plaza(id_plaza),
+    id_media_plaza integer NOT NULL,
     fecha_inicio date NOT NULL,
     fecha_fin date NOT NULL
 );
@@ -75,8 +75,8 @@ CREATE TABLE historico_plaza_media_plaza (
     una plaza puede estar vacante por un periodo de tiempo
 */
 CREATE TABLE historico_plaza_trabajador (
-    id_plaza integer NOT NULL REFERENCES plaza ON id_plaza,
-    id_trabajador integer NOT NULL REFERENCES trabajador ON id_trabajador,
+    id_plaza integer NOT NULL REFERENCES plaza(id_plaza),
+    id_trabajador integer NOT NULL REFERENCES trabajador(id_trabajador),
     fecha_inicio date NOT NULL,
     fecha_fin date NOT NULL
 );
